@@ -24,6 +24,12 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 });
 
+app.MapGet("/hello", (IConfiguration config) =>
+{
+    var greeting = config["Greeting"] ?? "Hello";
+    return greeting + "!";
+});
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
