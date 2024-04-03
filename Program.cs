@@ -25,7 +25,7 @@ app.MapGet("/weatherforecast", ()
 app.MapGet("/hello", (IConfiguration config) =>
 {
     var greeting = config["Greeting"] ?? "Hello";
-    return greeting + "!";
+    return greeting + ", Boi" + "!";
 });
 
 app.Run();
