@@ -1,3 +1,5 @@
+using static System.Linq.Enumerable;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,18 +13,14 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
+app.MapGet("/weatherforecast", ()
+    => Range(1, 5)
+        .Select(i => new WeatherForecast
         (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            DateOnly.FromDateTime(DateTime.Now.AddDays(i)),
             Random.Shared.Next(-20, 55),
             summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+        )));
 
 app.MapGet("/hello", (IConfiguration config) =>
 {
